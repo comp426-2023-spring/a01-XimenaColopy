@@ -16,10 +16,16 @@ const PORT = argv.port || 3000
 // Use the documentation for the Node.js `fs` module. 
 // The function must read a file located at `./public/index.html` and do some stuff with it.
 // The stuff that should be inside this function is all below.
-var CONTENT = fs.readFile('./public/index.html', (err, data) => {
-    if (err) throw err;
-});
 
+//var CONTENT;
+//fs.readFile('./public/index.html', 'utf8', (err, data) => {
+//    if (err) throw err;
+//    CONTENT = data;
+//    console.log(data);
+//});
+
+
+//console.log(CONTENT);
 //fs.readFile('./public/index.html',  function(err, data){
 
     // Display the file content
@@ -31,7 +37,7 @@ var CONTENT = fs.readFile('./public/index.html', (err, data) => {
 
 
 
-
+//console.log(CONTENT);
 
 // Define a const `server` as an arrow function using http.createServer. 
 // Use the documentation for the node.js http module. 
@@ -42,7 +48,13 @@ var CONTENT = fs.readFile('./public/index.html', (err, data) => {
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html');
-    res.end(CONTENT);
+    fs.readFile('./public/index.html', 'utf8', (err, data) => {
+        if (err) throw err;
+        res.end(data);
+        //CONTENT = data;
+    });
+    //res.end(CONTENT);
+    //res.end("hello world");
 });
 
 server.listen(PORT, () => {
